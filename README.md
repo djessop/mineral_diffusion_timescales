@@ -25,52 +25,54 @@ function of other projects.
 
 
 ## File structure
+```
 .
-+── diffusion_timescale_modelling
-│   +── diffusion_timescale_modelling.py
-│   +── __init__.py
-│   +── requirements.txt
-+── mineral_diffusion_timescales.ipynb
-+── mineral_diffusion_timescales.pdf
-+── README.md
-+── SEM_traverse_data
-    +── 1010CE
-    │   +── 0111A_A_02-1.xls
-    │   +── 0111A_A_02-2.xls
-    │   +── 0111A_A_02-3.xls
+├── diffusion_timescale_modelling
+│   ├── diffusion_timescale_modelling.py
+│   ├── __init__.py
+│   └── requirements.txt
+├── mineral_diffusion_timescales.ipynb
+├── mineral_diffusion_timescales.pdf
+├── README.md
+└── SEM_traverse_data
+    ├── 1010CE
+    │   ├── 0111A_A_02-1.xls
+    │   ├── 0111A_A_02-2.xls
+    │   ├── 0111A_A_02-3.xls
     .
     .
     .
-    │   +── 0111A_B_34-1.xls
-    │   +── 0111A_B_34-2.xls
-    │   +── 0111A_B_34-3.xls
-    +── 1657CE
-    │   +── 0913D_A_01-1.xls
-    │   +── 0913D_A_01-2.xls
-    │   +── 0913D_A_01-3.xls
+    │   ├── 0111A_B_34-1.xls
+    │   ├── 0111A_B_34-2.xls
+    │   └── 0111A_B_34-3.xls
+    ├── 1657CE
+    │   ├── 0913D_A_01-1.xls
+    │   ├── 0913D_A_01-2.xls
+    │   ├── 0913D_A_01-3.xls
     .
     .
     .
-    │   +── 0913D_C_40-1.xls
-    │   +── 0913D_C_40-2.xls
-    │   +── 0913D_C_40-3.xls
-    +── 5680BCE
-    │   +── 1101via_A_07-1.xls
-    │   +── 1101via_A_07-2.xls
-    │   +── 1101via_A_07-3.xls
+    │   ├── 0913D_C_40-1.xls
+    │   ├── 0913D_C_40-2.xls
+    │   └── 0913D_C_40-3.xls
+    ├── 5680BCE
+    │   ├── 1101via_A_07-1.xls
+    │   ├── 1101via_A_07-2.xls
+    │   ├── 1101via_A_07-3.xls
     .
     .
     .
-    │   +── 1101via_B_20_1.xls
-    │   +── 1101via_B_20_2.xls
-    │   +── 1101via_B_20_3.xls
-    +── 720BCE
-        +── 1904A-01-1.xls
-        +── 1904A-01-2.xls
-        +── 1904A-01-3.xls
+    │   ├── 1101via_B_20_1.xls
+    │   ├── 1101via_B_20_2.xls
+    │   └── 1101via_B_20_3.xls
+    └── 720BCE
+        ├── 1904A-01-1.xls
+        ├── 1904A-01-2.xls
+        ├── 1904A-01-3.xls
         .
 	.
 	.
-        +── 1904A-83-1.xls
-        +── 1904A-83-2.xls
-        +── 1904A-83-3.xls
+        ├── 1904A-83-1.xls
+        ├── 1904A-83-2.xls
+        └── 1904A-83-3.xls
+```
