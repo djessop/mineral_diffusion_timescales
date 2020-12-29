@@ -3,7 +3,7 @@
 Code and sample data for calculating Fe-Mg diffusion timescales in minerals, as described in Metcalf et al. (2021), "Magmatic Processes at La Soufrière de Guadeloupe: Insights from Crystal Studies and Diffusion Timescales for eruption onset", Frontiers in Earth Science, DOI:xxx
 
 ## Installation 
-The code is written in python and is compatible with all versions >3.6.  It can be run from within an interactive python environment (e.g. ipython), or using the supplied jupyter notebook.
+The code is written in python and is compatible with all versions >3.6.  It can be run from the command line, within an interactive python environment (e.g. ipython), or using the supplied jupyter notebook.
 
 To install, first clone the git repository:
 > git clone https://github.com/djessop/mineral_diffusion_timescales.git
