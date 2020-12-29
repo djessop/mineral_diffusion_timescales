@@ -14,7 +14,7 @@ Second, check that the required packages are installed
 > pip install -r diffusion_timescale_modelling/requirements.txt
 
 You may wish to do this within a virtual environment, so as not to affect the function of other projects.
-> python3 -m venv <your venv name>
+> python3 -m venv [your venv name]
 
 
 
