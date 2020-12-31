@@ -1,6 +1,8 @@
 # mineral diffusion timescales
 
-Code and sample data for calculating Fe-Mg diffusion timescales in minerals, as described in Metcalf et al. (2021), "Magmatic Processes at La Soufrière de Guadeloupe: Insights from Crystal Studies and Diffusion Timescales for eruption onset", Frontiers in Earth Science, DOI:xxx
+Code and sample data for calculating Fe-Mg diffusion timescales in minerals, as described in Metcalf et al. (2021), "Magmatic Processes at La Soufrière de Guadeloupe: Insights from Crystal Studies and Diffusion Timescales for eruption onset", Frontiers in Earth Science, DOI:xxx.
+
+If you use this package please cite the above article in your study.  Citation files (.bib and .ris) are included in the repository.
 
 ## Installation 
 The code is written in python and is compatible with all versions >3.6.  It can be run from the command line, within an interactive python environment (e.g. ipython), or using the supplied jupyter notebook.
@@ -25,6 +27,8 @@ You may wish to do this within a virtual environment, so as not to affect the fu
 │   ├── diffusion_timescale_modelling.py
 │   ├── __init__.py
 │   └── requirements.txt
+├── Metcalfe_etal_2021_Frontiers.bib
+├── Metcalfe_etal_2021_Frontiers.ris
 ├── mineral_diffusion_timescales.ipynb
 ├── mineral_diffusion_timescales.pdf
 ├── README.md
