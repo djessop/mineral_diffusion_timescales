@@ -23,12 +23,13 @@ You may wish to do this within a virtual environment, so as not to affect the fu
 ## File structure
 ```
 .
+├── citaions
+|   ├── Metcalfe_etal_2021_Frontiers.bib
+|   ├── Metcalfe_etal_2021_Frontiers.ris
 ├── diffusion_timescale_modelling
 │   ├── diffusion_timescale_modelling.py
 │   ├── __init__.py
 │   └── requirements.txt
-├── Metcalfe_etal_2021_Frontiers.bib
-├── Metcalfe_etal_2021_Frontiers.ris
 ├── mineral_diffusion_timescales.ipynb
 ├── mineral_diffusion_timescales.pdf
 ├── README.md
