@@ -1,6 +1,6 @@
 # mineral diffusion timescales
 
-Code and sample data for calculating Fe-Mg diffusion timescales in minerals, as described in Metcalf et al. (2021), "Magmatic Processes at La Soufrière de Guadeloupe: Insights from Crystal Studies and Diffusion Timescales for eruption onset", Frontiers in Earth Science, DOI:xxx.
+Code and sample data for calculating Fe-Mg diffusion timescales in minerals, as described in Metcalf et al. (2021), "Magmatic Processes at La Soufrière de Guadeloupe: Insights from Crystal Studies and Diffusion Timescales for eruption onset", Frontiers in Earth Science, DOI:xxx.  This software is distributed under a GPL-v3.0 licence.
 
 If you use this package please cite the above article in your study.  Citation files (.bib and .ris) are included in the repository.
 
