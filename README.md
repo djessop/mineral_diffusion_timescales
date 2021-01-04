@@ -20,6 +20,11 @@ You may wish to do this within a virtual environment, so as not to affect the fu
 
 
 
+## Development
+
+Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact d.jessop@opgc.fr to discuss adding additional systems or making modifications to existing ones.
+
+
 ## File structure
 ```
 .
