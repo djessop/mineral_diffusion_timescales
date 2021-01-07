@@ -30,11 +30,29 @@ E  = -308000    # Activation energy
 D0 =  2.8551e-7 # Base diffusion coefficient
 
 
-def diffusion_coeff(T): 
+def diffusion_coeff(T):
+    '''
+    Return the temperature-dependent diffusion coefficient according to the 
+    current model.  Note that the activation energy, E, is defined as being 
+    negative.
+
+    SEE ALSO
+    --------
+    temp_from_diff_coeff
+    '''
     return D0 * np.exp(E / (R * T))
 
 
 def temp_from_diff_coeff(D):
+    '''
+    Return temperature from diffusion coefficient according to the 
+    current model, the inverse of the diffusion_coeff function.  Note that
+    E is defined as being -ve.
+
+    SEE ALSO
+    --------
+    diffusion_coeff
+    '''
     return E / (R * np.log(D/D0))
 
 
