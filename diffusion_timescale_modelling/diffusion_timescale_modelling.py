@@ -11,7 +11,7 @@ from scipy.optimize import curve_fit, newton, fmin
 from scipy.constants import R  # Ideal-gas constant
 from matplotlib.ticker import MultipleLocator
 
-from my_stats.mle_gamma import se_estimates
+from ml_stats.mle_gamma import se_estimates
 
 
 import pandas as pd # Use pandas' inherrent excel support, rather than numpy
