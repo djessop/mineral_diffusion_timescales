@@ -1,6 +1,6 @@
 # mineral diffusion timescales
 
-Code and sample data for calculating Fe-Mg diffusion timescales in minerals, as described in Metcalf et al. (2021), "Magmatic Processes at La Soufrière de Guadeloupe: Insights from Crystal Studies and Diffusion Timescales for eruption onset", Frontiers in Earth Science, DOI:xxx.  This software is distributed under a GPL-v3.0 licence.
+Code and sample data for calculating Fe-Mg diffusion timescales in minerals, as described in Metcalf et al. (2021), "Magmatic Processes at La Soufrière de Guadeloupe: Insights from Crystal Studies and Diffusion Timescales for eruption onset", Frontiers in Earth Science, DOI:10.3389/feart.2021.617294.  This software is distributed under a GPL-v3.0 licence.
 
 If you use this package please cite the above article in your study.  Citation files (.bib and .ris) are included in the repository.
 
@@ -15,14 +15,14 @@ or download the zip file.
 Second, check that the required packages are installed
 > pip install -r diffusion_timescale_modelling/requirements.txt
 
-You may wish to do this within a virtual environment, so as not to affect the function of other projects.
+Note that the "--user" flag may be required depending on the user's level of access.  You may wish to do this within a virtual environment, so as not to affect the function of other projects (in which case the user flag is unnecessary),
 > python3 -m venv [your venv name]
 
 
 
 ## Development
 
-Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact d.jessop@opgc.fr to discuss adding additional systems or making modifications to existing ones.
+Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact d.jessop@opgc.fr to discuss adding additional systems or making modifications to existing ones.x
 
 
 ## File structure
