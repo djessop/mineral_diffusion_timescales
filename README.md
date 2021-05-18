@@ -22,7 +22,7 @@ Note that the "--user" flag may be required depending on the user's level of acc
 
 ## Development
 
-Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact d.jessop@opgc.fr to discuss adding additional systems or making modifications to existing ones.x
+Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact d.jessop@opgc.fr to discuss adding additional systems or making modifications to existing ones.
 
 
 ## File structure

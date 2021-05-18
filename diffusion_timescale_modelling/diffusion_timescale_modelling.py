@@ -25,25 +25,62 @@ import xlrd
 pd.options.display.float_format = '{:,.2f}'.format
 
 
+fO2 = 6.31e-7    # Partial pressure of O2 for NNO buffer with dNNO=0.8, see
+                 # Pichavant et al., (2018).
+E   = -308000    # Activation energy
+T   = 1281.75    # Melt matrix temperature, from Dohmen et al. (2016)
+#D0  =  2.8551e-7 # Base diffusion coefficient
 
-E  = -308000    # Activation energy
-D0 =  2.8551e-7 # Base diffusion coefficient
+
+def opx_model(fO2=fO2):
+    '''
+    Return D0, the diffusion coefficient (at absolute zero), for the opx 
+    mineral system using the model from Dohmen et al, (2016).
+
+    Parameters
+    ----------
+    fO2 : float
+        partial pressure of O2 in Pa.  Default value is 6.31e-7 Pa, valid 
+        for dNNO = 0.8, T ~ 900°C as per Pichavant et al. (2018).
+
+    Returns
+    -------
+    D0 : float
+        Diffusion coefficient (at absolute zero), as required by the Arhenius 
+        equation.  If x is in Pa, D0 is returned in m2/s.
+
+    SEE ALSO
+    --------
+    diffusion_coeff
+    temp_from_diff_coeff
+    '''
+    return 1.12e-6 * fO2 ** 0.053
 
 
-def diffusion_coeff(T):
+def diffusion_coeff(T, fO2=fO2):
     '''
     Return the temperature-dependent diffusion coefficient according to the 
     current model.  Note that the activation energy, E, is defined as being 
     negative.
 
+    Parameters
+    ----------
+    T : float
+        Absolute temperature/[K]
+    fO2 : float
+        Partial pressure of O2/[Pa]
+
     SEE ALSO
     --------
+    opx_model
     temp_from_diff_coeff
     '''
+    D0 = opx_model(fO2)
+    
     return D0 * np.exp(E / (R * T))
 
 
-def temp_from_diff_coeff(D):
+def temp_from_diff_coeff(D, fO2=fO2):
     '''
     Return temperature from diffusion coefficient according to the 
     current model, the inverse of the diffusion_coeff function.  Note that
@@ -52,7 +89,10 @@ def temp_from_diff_coeff(D):
     SEE ALSO
     --------
     diffusion_coeff
+    opx_model
     '''
+    D0 = opx_model(fO2)
+
     return E / (R * np.log(D/D0))
 
 
@@ -68,11 +108,14 @@ def analytical_soln(x, C1, C2, loc, tau, D):
     length of the list of initial guesses that is passed to __curve_fit__.
     '''
     
-    return C2 + (C1 - C2) / 2 * erfc((x - loc)/(2 * np.sqrt(D * tau)))
+    return C2 + (C1 - C2) / 2 * erfc((x - loc) / (2 * np.sqrt(D * tau)))
 
 
 def fit_wrapper(x, y, p0, bounds, jac=None, function_to_fit=analytical_soln):
+    # Length of upper and lower bounds have to be identical
     lower_bounds, upper_bounds = bounds
+    assert len(lower_bounds) == len(upper_bounds)
+
     if len(p0) == 5:
         # The analytical solution is non linear so we need a good guess at 
         # the solution in order for the solver to converge.
@@ -82,10 +125,13 @@ def fit_wrapper(x, y, p0, bounds, jac=None, function_to_fit=analytical_soln):
         Test       = temp_from_diff_coeff(popt[4])
     else:
         # Ensure that list of initial values has no entry for diffusion - this 
-        # will cause the solver to ignore diffusion as an ajustable parameters.
+        # will cause the solver to ignore diffusion (and hence temperature) as
+        # ajustable parameters.
         assert len(p0) == 4
-        upper_bounds.pop()
-        lower_bounds.pop()
+        if len(upper_bounds) == 5:
+            upper_bounds.pop()
+            lower_bounds.pop()
+        D = diffusion_coeff(T, fO2)
         fn_wrapper = partial(function_to_fit, D=D)
         popt, pcov = curve_fit(fn_wrapper, x, y, p0, jac=jac,
                                bounds=(lower_bounds, upper_bounds))
@@ -93,7 +139,7 @@ def fit_wrapper(x, y, p0, bounds, jac=None, function_to_fit=analytical_soln):
         Test       = T
         
     timescale = popt[3] / (3600 * 24)  # In days
-    ts_sigma  = 1.96*np.sqrt(np.diag(pcov))[3] / (3600 * 24)
+    ts_sigma  = 1.96 * np.sqrt(np.diag(pcov))[3] / (3600 * 24)
     result_tuple = (timescale, ts_sigma, Test, diffusion)
 
     return popt, pcov, result_tuple
@@ -284,7 +330,7 @@ def run_model_fitting(filenames, do_plot=True,
     return df
 
 
-def plot_data_model(filename, popt=None, pcov=None,
+def plot_data_model(filename, popt=None, pcov=None, savefig=True,
                     sheetname='Dan, WH37 processing, usabl (2)'):
     '''
     
@@ -298,9 +344,9 @@ def plot_data_model(filename, popt=None, pcov=None,
 
     all_data = read_raw_data(filename)
 
-    if not popt:
+    if popt is None:
         popt = np.load('./model_fits/%s-popt.npy' % code)
-    if not pcov:
+    if pcov is None:
         pcov = np.load('./model_fits/%s-pcov.npy' % code)
 
     if len(popt) == 4:
@@ -370,9 +416,9 @@ def plot_data_model(filename, popt=None, pcov=None,
         
     ax.set_title(code)
         
-    fig.savefig(filename[:-4] + '.png')
-        
-    plt.close()
+    if savefig:
+        fig.savefig(filename[:-4] + '.png')
+        plt.close()
         
     return data, R2, (fig, ax)
 
