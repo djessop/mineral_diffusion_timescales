@@ -81,10 +81,23 @@ popt, pcov, (timescale, ts_sigma, Test, diffusion) = fit_wrapper(
     x, y, p0, bounds=[lower_bounds, upper_bounds])
 ```
 
+In future versions, where other diffusion models and mineral systems are planned, the "function_to_fit" argument may be set accordingly.  Currently, it defaults to the opx/Fe-Mg system ("analytical_solution").
 
-> filenames = [f for f in sorted(glob('SEM_traverse_data/**',
+With the above done, it may be interesting to look at a plot of the raw data and model solution.  This can be accomplished using "plot_data_model":
+
+```python
+data, R2, (fig, ax) = plot_data_model(filename, popt, pcov, savefig=False)
+```
+
+Finally, it might be interesting to batch run the entire database in one go.  Assuming that the structure is as per this archive ('SEM_traverse_data/<eruption_name>/<sample_file>.xls'), this can be achieved via
+
+```python
+## use the glob module to find all the xls file under the archive
+filenames = [f for f in sorted(glob('SEM_traverse_data/**',
 	       recursive=True)) if f.endswith('.xls')] 
-
+df = run_model_fitting(filenames)	       
+```
+The output is a pandas dataframe ('df') 
 
 ## File structure
 ```

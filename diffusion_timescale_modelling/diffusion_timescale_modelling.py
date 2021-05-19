@@ -223,7 +223,7 @@ def unique_sample_names(df):
     return sorted(list(set(cropped_samples)))
 
 
-def sorted_data_to_df(df, R2thresh=0.9):
+def sorted_data_to_df(df, R2thresh=0.85):
     keep_list = eval_ts_data(df, R2thresh=R2thresh)
     df      = df[keep_list]
     
