@@ -31,7 +31,9 @@ The core of the diffusion_timescale_modelling code is the fitting of an analytic
 
 The code is situated in the diffusion_timescale_modelling/diffusion_timescale_modelling.py file.  To use it, do the usual:
 
-> from diffusion_timescale_modelling.diffusion_timescale_modelling import <function_name>
+```python
+from diffusion_timescale_modelling.diffusion_timescale_modelling import <function_name>
+```
 
 The module provides the following functions (see the individual function documentation for help):
 - opx_model
