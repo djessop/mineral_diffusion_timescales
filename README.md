@@ -91,7 +91,8 @@ With the above done, it may be interesting to look at a plot of the raw data and
 data, R2, (fig, ax) = plot_data_model(filename, popt, pcov, savefig=False)
 ```
 
-Finally, it might be interesting to batch run the entire database in one go.  Assuming that the structure is as per this archive ('SEM_traverse_data/<eruption_name>/<sample_file>.xls'), this can be achieved via
+### Bulk runs and quality-of-fit assessment
+Finally, it might be interesting to batch run the entire database in one go.  Assuming that the structure is as per this archive ('SEM_traverse_data/<eruption_name>/<sample_file>.xls', see below), this can be achieved via
 
 ```python
 ## use the glob module to find all the xls file under the archive
@@ -102,9 +103,10 @@ df = run_model_fitting(filenames)
 sorted_df = sorted_data_to_df(df)
 ```
 The output is a couple of pandas dataframes ('df' and 'sorted_df') containing the measured and estimated (fitted) melt temperatures, timescale and its standard error, and the R2 (Pearson's correlation coefficient) value.  Currently, this function is not configured for running analyses in parallel, though this is planned for future versions.  For the ~400 samples in the Met2021 study, this takes only a couple of minutes on a computer with a reasonably fast processor.
-    
+
+### 
 ```python
-## Write each eruptino 
+## Write each eruption as a tab in an excel file
 writer = pd.ExcelWriter('20210519-sorted-timescales.xlsx',
     engine='xlsxwriter')
 
@@ -115,6 +117,10 @@ for eruption in eruptions:
     
 writer.save()
 ```
+
+### Population timescales
+
+
 
 ## File structure
 ```

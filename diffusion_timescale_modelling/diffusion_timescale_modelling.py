@@ -423,8 +423,7 @@ def plot_data_model(filename, popt=None, pcov=None, savefig=True,
     return data, R2, (fig, ax)
 
 
-def calc_fit_plot(filename='./22-06-sorted-timescales.xlsx',
-                  sheet_name='1657CE', timescalekey='timescale',
+def calc_fit_plot(filename, sheet_name, timescalekey='timescale',
                   ppf_head=.01, ppf_tail=.999, ppf_cutoff=None,
                   ts_cutoff=None, cdf=False, nbins=10, figsize=(8, 6)):
     '''
