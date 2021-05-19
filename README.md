@@ -103,6 +103,18 @@ sorted_df = sorted_data_to_df(df)
 ```
 The output is a couple of pandas dataframes ('df' and 'sorted_df') containing the measured and estimated (fitted) melt temperatures, timescale and its standard error, and the R2 (Pearson's correlation coefficient) value.  Currently, this function is not configured for running analyses in parallel, though this is planned for future versions.  For the ~400 samples in the Met2021 study, this takes only a couple of minutes on a computer with a reasonably fast processor.
     
+```python
+## Write each eruptino 
+writer = pd.ExcelWriter('20210519-sorted-timescales.xlsx',
+    engine='xlsxwriter')
+
+eruptions = sorted(list(set(sorted_df['eruption'])))
+for eruption in eruptions: 
+    subdf = sorted_df[sorted_df['eruption'] == eruption]
+    subdf.to_excel(writer, sheet_name=eruption, index=False) 
+    
+writer.save()
+```
 
 ## File structure
 ```
