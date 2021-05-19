@@ -244,9 +244,9 @@ def sorted_data_to_df(df, R2thresh=0.85):
         sort_df = pd.concat([sort_df,
                              pd.DataFrame.from_dict(d, orient='index').T])
       
-    return sort_df.reset_index(drop=True).sort_values(
-        by=['eruption', 'timescale'])[['eruption', 'sample', 'Tmeas', 'Test',
-                                       'timescale', 'n_good', 'ts_std']]
+    return sort_df.sort_values(by=['eruption', 'timescale']).reset_index(
+        drop=True)[['eruption', 'sample', 'Tmeas', 'Test',
+                    'timescale', 'n_good', 'ts_std']]
 
 
 def run_model_fitting(filenames, do_plot=True,

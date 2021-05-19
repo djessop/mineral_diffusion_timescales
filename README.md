@@ -95,9 +95,12 @@ Finally, it might be interesting to batch run the entire database in one go.  As
 ## use the glob module to find all the xls file under the archive
 filenames = [f for f in sorted(glob('SEM_traverse_data/**',
 	       recursive=True)) if f.endswith('.xls')] 
-df = run_model_fitting(filenames)	       
+df = run_model_fitting(filenames)
+## apply the data quality and 'goodness-of-fit' assessments
+sorted_df = sorted_data_to_df(df)
 ```
-The output is a pandas dataframe ('df') 
+The output is a couple of pandas dataframes ('df' and 'sorted_df') containing the measured and estimated (fitted) melt temperatures, timescale and its standard error, and the R2 (Pearson's correlation coefficient) value.  Currently, this function is not configured for running analyses in parallel, though this is planned for future versions.  For the ~400 samples in the Met2021 study, this takes only a couple of minutes on a computer with a reasonably fast processor.
+    
 
 ## File structure
 ```
