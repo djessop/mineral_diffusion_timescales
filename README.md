@@ -57,7 +57,7 @@ Going further, to estimate the diffusion timescale and other parameters via a fi
 
 > filename = 'SEM_traverse_data/1010CE/0111A_A_10-3.xls'
 > data = pd.read_excel(filename, sheet_name='raw')
-> ## the 'raw' sheet contains 'distance' and 'greyscale' columns
+the 'raw' sheet contains 'distance' and 'greyscale' columns
 > x, y = data[[''distance', 'greyscale']].values.T
 > ## The initial guess requires a fairly precise value of the sample
 > ## temperature, obtained using the opx-melt geothermometer model of
