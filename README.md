@@ -49,33 +49,37 @@ The module provides the following functions (see the individual function documen
 - read_raw_data
 
 For example, to calculate the diffusion coefficient for a given temperature, T, (in K) and O2 partial pressure, fO2, (in Pa) we would use the "diffusion_coeff" function, which itself makes a call to "opx_model":
-> print(diffusion_model(T, fO2))
+```python
+print(diffusion_model(T, fO2))
+```
 
 Note that fO2 takes a default value of 6.31e-7 Pa, which is the case for the Mg-Fe analyses in Met2021.
 
 Going further, to estimate the diffusion timescale and other parameters via a fit of the empirical data, we would use the "fit_wrapper" function, which itself requires the data, an initial guess at the solution and bounds for the solution domain as inputs.  Here is an example of how to do this, using the 
 
-> filename = 'SEM_traverse_data/1010CE/0111A_A_10-3.xls'
-> data = pd.read_excel(filename, sheet_name='raw')
-the 'raw' sheet contains 'distance' and 'greyscale' columns
-> x, y = data[[''distance', 'greyscale']].values.T
-> ## The initial guess requires a fairly precise value of the sample
-> ## temperature, obtained using the opx-melt geothermometer model of
-> ## Putirka (2008) and contained in the same excel workbook
-> wb   = xlrd.open_workbook(filename) 
-> ws   = wb.sheet_by_name('Dan, WH37 processing, usabl (2)')
-> T    = ws.cell(3, 13).value
-> D    = diffusion_coeff(T)
-> Dlow = diffusion_coeff(T - 30)
-> Dupp = diffusion_coeff(T + 30)
-> ## Initial guess containing Cmax, Cmin, mu, tau, D.  See Met2021 for details
-> p0 = [y.max(), y.min(), x.mean(), 2e6, D]
-> ## bounds for solution domain: unconstrained except for timescale (+ve
-> ## values only!), and diffusion coefficient:
-> lower_bounds = [-np.inf, -np.inf, -np.inf, 0, Dlow]
-> upper_bounds = [ np.inf,  np.inf,  np.inf, np.inf, Dupp]
-> popt, pcov, (timescale, ts_sigma, Test, diffusion) = fit_wrapper(
->     x, y, p0, bounds=[lower_bounds, upper_bounds])
+```python
+filename = 'SEM_traverse_data/1010CE/0111A_A_10-3.xls'
+data = pd.read_excel(filename, sheet_name='raw')
+## the 'raw' sheet contains 'distance' and 'greyscale' columns
+x, y = data[[''distance', 'greyscale']].values.T
+## The initial guess requires a fairly precise value of the sample
+## temperature, obtained using the opx-melt geothermometer model of
+## Putirka (2008) and contained in the same excel workbook
+wb   = xlrd.open_workbook(filename) 
+ws   = wb.sheet_by_name('Dan, WH37 processing, usabl (2)')
+T    = ws.cell(3, 13).value
+D    = diffusion_coeff(T)
+Dlow = diffusion_coeff(T - 30)
+Dupp = diffusion_coeff(T + 30)
+## Initial guess containing Cmax, Cmin, mu, tau, D.  See Met2021 for details
+p0 = [y.max(), y.min(), x.mean(), 2e6, D]
+## bounds for solution domain: unconstrained except for timescale (+ve
+## values only!), and diffusion coefficient:
+lower_bounds = [-np.inf, -np.inf, -np.inf, 0, Dlow]
+upper_bounds = [ np.inf,  np.inf,  np.inf, np.inf, Dupp]
+popt, pcov, (timescale, ts_sigma, Test, diffusion) = fit_wrapper(
+    x, y, p0, bounds=[lower_bounds, upper_bounds])
+```
 
 
 > filenames = [f for f in sorted(glob('SEM_traverse_data/**',
