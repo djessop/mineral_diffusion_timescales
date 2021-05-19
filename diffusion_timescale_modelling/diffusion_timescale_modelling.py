@@ -368,6 +368,17 @@ def plot_data_model(filename, popt=None, pcov=None, savefig=True,
     _ = ax.set_xlabel(r'Traverse location/[$\mu$m]', fontsize=14)
     _ = ax.set_ylabel(r'Greyscale intensity', fontsize=14)
 
+    # alpha = 0.6
+    # bboxdict = dict(boxstyle='round', alpha=alpha, color='w')
+    # _ = ax.text(x=35, y=140, s='Fe rich',
+    #             horizontalalignment='center',
+    #             zorder=5,
+    #             bbox=bboxdict)
+    # _ = ax.text(x=5,  y=112, s='Fe poor',
+    #             horizontalalignment='center',
+    #             zorder=5,
+    #             bbox=bboxdict)
+
     model_soln = analytical_soln(x, *popt).values
     ax.plot(x * 1e6, model_soln, '-k', label='model fit')
     ax.legend(loc='right')

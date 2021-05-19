@@ -8,6 +8,7 @@ If you use this package please cite the above article in your study.  Citation f
 The code is written in python and is compatible with all versions >3.6.  It can be run from the command line, within an interactive python environment (e.g. ipython), or using the supplied jupyter notebook.
 
 To install, first clone the git repository:
+
 ```bash
 git clone https://github.com/djessop/mineral_diffusion_timescales.git
 ```
@@ -15,11 +16,13 @@ git clone https://github.com/djessop/mineral_diffusion_timescales.git
 or download the zip file.
 
 Second, check that the required packages are installed
+
 ```bash
 pip install -r diffusion_timescale_modelling/requirements.txt
 ```
 
 Note that the "--user" flag may be required depending on the user's level of access.  You may wish to do this within a virtual environment, so as not to affect the function of other projects (in which case the user flag is unnecessary),
+
 ```bash
 python3 -m venv [your venv name]
 ```
@@ -68,7 +71,7 @@ Going further, to estimate the diffusion timescale and other parameters via a fi
 filename = 'SEM_traverse_data/1010CE/0111A_A_10-3.xls'
 data = pd.read_excel(filename, sheet_name='raw')
 ## the 'raw' sheet contains 'distance' and 'greyscale' columns
-x, y = data[[''distance', 'greyscale']].values.T
+x, y = data[['distance', 'greyscale']].values.T
 ## The initial guess requires a fairly precise value of the sample
 ## temperature, obtained using the opx-melt geothermometer model of
 ## Putirka (2008) and contained in the same excel workbook
@@ -107,7 +110,6 @@ df = run_model_fitting(filenames)
 ## apply the data quality and 'goodness-of-fit' assessments
 sorted_df = sorted_data_to_df(df)
 
-```python
 ## Write each eruption as a tab in an excel file
 writer = pd.ExcelWriter('sorted_timescales.xlsx',
     engine='xlsxwriter')
