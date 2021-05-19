@@ -122,11 +122,12 @@ for eruption in eruptions:
 writer.save()
 ```
 
-The output is a couple of pandas dataframes ('df' and 'sorted_df') containing the measured and estimated (fitted) melt temperatures, timescale and its standard error, and the R2 (Pearson's correlation coefficient) value.  Currently, this function is not configured for running analyses in parallel, though this is planned for future versions.  For the ~400 samples in the Met2021 study, this takes only a couple of minutes on a computer with a reasonably fast processor.
+The output is a couple of pandas dataframes ('df' and 'sorted_df') containing the measured and estimated (fitted) melt temperatures, timescale and its standard error, and the R2 (Pearson's correlation coefficient) value.  Currently, this function is not configured for running analyses in parallel, though this is planned for future versions.  For the ~400 samples in the Met2021 study, this takes only a couple of minutes on a computer with a reasonably fast processor.  You will also find an excel file named 'sorted_timescales.xlsx' in the current working directory containing the fitted parameters for each sample, with separate worksheets for each eruption.  
+
 
 ### Population timescales
 
-
+TO DO!!!
 
 
 ## File structure
