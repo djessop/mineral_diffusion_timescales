@@ -25,6 +25,63 @@ Note that the "--user" flag may be required depending on the user's level of acc
 Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact d.jessop@opgc.fr to discuss adding additional systems or making modifications to existing ones.
 
 
+## Usage
+
+The core of the diffusion_timescale_modelling code is the fitting of an analytical solution for concentration profile to SEM traverse data.  In doing this, we can determine a timescale for the diffusion processes that created the profile.  Hence, to run the code one needs data, and we have provided our SEM data for several eruptions of la Soufrière volcano, Guadeloupe as reported in Metcalfe et al (2021), hereto refered to as Met2021.
+
+The code is situated in the diffusion_timescale_modelling/diffusion_timescale_modelling.py file.  To use it, do the usual:
+
+> from diffusion_timescale_modelling.diffusion_timescale_modelling import <function_name>
+
+The module provides the following functions (see the individual function documentation for help):
+- opx_model
+- diffusion_coeff
+- temp_from_diff_coeff
+- analytical_soln
+- fit_wrapper
+- coefficient_determination
+- eval_ts_data
+- unique_sample_names
+- sorted_data_to_df
+- run_model_fitting
+- plot_data_model
+- calc_fit_plot
+- read_raw_data
+
+For example, to calculate the diffusion coefficient for a given temperature, T, (in K) and O2 partial pressure, fO2, (in Pa) we would use the "diffusion_coeff" function, which itself makes a call to "opx_model":
+> print(diffusion_model(T, fO2))
+
+Note that fO2 takes a default value of 6.31e-7 Pa, which is the case for the Mg-Fe analyses in Met2021.
+
+Going further, to estimate the diffusion timescale and other parameters via a fit of the empirical data, we would use the "fit_wrapper" function, which itself requires the data, an initial guess at the solution and bounds for the solution domain as inputs.  Here is an example of how to do this, using the 
+
+> filename = 'SEM_traverse_data/1010CE/0111A_A_10-3.xls'
+> data = pd.read_excel(filename, sheet_name='raw')
+> ## the 'raw' sheet contains 'distance' and 'greyscale' columns
+> x, y = data[[''distance', 'greyscale']].values.T
+> ## The initial guess requires a fairly precise value of the sample
+> ## temperature, obtained using the opx-melt geothermometer model of
+> ## Putirka (2008) and contained in the same excel workbook
+> wb   = xlrd.open_workbook(filename) 
+> ws   = wb.sheet_by_name('Dan, WH37 processing, usabl (2)')
+> T    = ws.cell(3, 13).value
+> D    = diffusion_coeff(T)
+> Dlow = diffusion_coeff(T - 30)
+> Dupp = diffusion_coeff(T + 30)
+> ## Initial guess containing Cmax, Cmin, mu, tau, D.  See Met2021 for details
+> p0 = [y.max(), y.min(), x.mean(), 2e6, D]
+> ## bounds for solution domain: unconstrained except for timescale (+ve
+> ## values only!), and diffusion coefficient:
+> lower_bounds = [-np.inf, -np.inf, -np.inf, 0, Dlow]
+> upper_bounds = [ np.inf,  np.inf,  np.inf, np.inf, Dupp]
+> popt, pcov, (timescale, ts_sigma, Test, diffusion) = fit_wrapper(
+>     x, y, p0, bounds=[lower_bounds, upper_bounds])
+
+
+> filenames = [f for f in sorted(glob('SEM_traverse_data/**',
+	       recursive=True)) if f.endswith('.xls')] 
+
+
 ## File structure
 ```
 .
