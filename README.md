@@ -8,16 +8,21 @@ If you use this package please cite the above article in your study.  Citation f
 The code is written in python and is compatible with all versions >3.6.  It can be run from the command line, within an interactive python environment (e.g. ipython), or using the supplied jupyter notebook.
 
 To install, first clone the git repository:
-> git clone https://github.com/djessop/mineral_diffusion_timescales.git
+```
+git clone https://github.com/djessop/mineral_diffusion_timescales.git
+```
 
 or download the zip file.
 
 Second, check that the required packages are installed
-> pip install -r diffusion_timescale_modelling/requirements.txt
+```
+pip install -r diffusion_timescale_modelling/requirements.txt
+```
 
 Note that the "--user" flag may be required depending on the user's level of access.  You may wish to do this within a virtual environment, so as not to affect the function of other projects (in which case the user flag is unnecessary),
-> python3 -m venv [your venv name]
-
+```
+python3 -m venv [your venv name]
+```
 
 
 ## Development
@@ -92,7 +97,7 @@ data, R2, (fig, ax) = plot_data_model(filename, popt, pcov, savefig=False)
 ```
 
 ### Bulk runs and quality-of-fit assessment
-Finally, it might be interesting to batch run the entire database in one go.  Assuming that the structure is as per this archive ('SEM_traverse_data/<eruption_name>/<sample_file>.xls', see below), this can be achieved via
+It might be interesting to batch run the entire database in one go.  Assuming that the structure is as per this archive ('SEM_traverse_data/<eruption_name>/<sample_file>.xls', see below), this can be achieved via
 
 ```python
 ## use the glob module to find all the xls file under the archive
@@ -101,13 +106,10 @@ filenames = [f for f in sorted(glob('SEM_traverse_data/**',
 df = run_model_fitting(filenames)
 ## apply the data quality and 'goodness-of-fit' assessments
 sorted_df = sorted_data_to_df(df)
-```
-The output is a couple of pandas dataframes ('df' and 'sorted_df') containing the measured and estimated (fitted) melt temperatures, timescale and its standard error, and the R2 (Pearson's correlation coefficient) value.  Currently, this function is not configured for running analyses in parallel, though this is planned for future versions.  For the ~400 samples in the Met2021 study, this takes only a couple of minutes on a computer with a reasonably fast processor.
 
-### 
 ```python
 ## Write each eruption as a tab in an excel file
-writer = pd.ExcelWriter('20210519-sorted-timescales.xlsx',
+writer = pd.ExcelWriter('sorted_timescales.xlsx',
     engine='xlsxwriter')
 
 eruptions = sorted(list(set(sorted_df['eruption'])))
@@ -118,7 +120,10 @@ for eruption in eruptions:
 writer.save()
 ```
 
+The output is a couple of pandas dataframes ('df' and 'sorted_df') containing the measured and estimated (fitted) melt temperatures, timescale and its standard error, and the R2 (Pearson's correlation coefficient) value.  Currently, this function is not configured for running analyses in parallel, though this is planned for future versions.  For the ~400 samples in the Met2021 study, this takes only a couple of minutes on a computer with a reasonably fast processor.
+
 ### Population timescales
+
 
 
 
