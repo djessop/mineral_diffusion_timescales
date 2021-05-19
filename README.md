@@ -8,19 +8,19 @@ If you use this package please cite the above article in your study.  Citation f
 The code is written in python and is compatible with all versions >3.6.  It can be run from the command line, within an interactive python environment (e.g. ipython), or using the supplied jupyter notebook.
 
 To install, first clone the git repository:
-```
+```bash
 git clone https://github.com/djessop/mineral_diffusion_timescales.git
 ```
 
 or download the zip file.
 
 Second, check that the required packages are installed
-```
+```bash
 pip install -r diffusion_timescale_modelling/requirements.txt
 ```
 
 Note that the "--user" flag may be required depending on the user's level of access.  You may wish to do this within a virtual environment, so as not to affect the function of other projects (in which case the user flag is unnecessary),
-```
+```bash
 python3 -m venv [your venv name]
 ```
 
