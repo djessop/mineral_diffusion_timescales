@@ -249,7 +249,7 @@ def sorted_data_to_df(df, R2thresh=0.85):
                     'timescale', 'n_good', 'ts_std']]
 
 
-def run_model_fitting(filenames, do_plot=True,
+def run_model_fitting(filenames, do_plot=True, tau=2e6,
                       sheetname = 'Dan, WH37 processing, usabl (2)'):
     from xlrd import XLRDError
     import xlrd
@@ -278,7 +278,7 @@ def run_model_fitting(filenames, do_plot=True,
             # Bounds for optimisation are: 
             lower_bounds = [-np.inf, -np.inf, -np.inf, 0, Dlow]
             upper_bounds = [ np.inf,  np.inf,  np.inf, np.inf, Dupp]
-            p0   = [y.max(), y.min(), x.mean(), 2e6, D]
+            p0   = [y.max(), y.min(), x.mean(), tau, D]
 
     
             code, eruption, *foo = filename.split('/')[::-1]
