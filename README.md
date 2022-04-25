@@ -21,7 +21,7 @@ Second, check that the required packages are installed
 pip install -r diffusion_timescale_modelling/requirements.txt
 ```
 
-Note that the "--user" flag may be required depending on the user's level of access.  You may wish to do this within a virtual environment, so as not to affect the function of other projects (in which case the user flag is unnecessary),
+Note that the "--user" flag may be required depending on the user's level of access.  You may wish to do this within a virtual environment, so as not to affect the function of other projects (in which case the "--user" flag is unnecessary),
 
 ```bash
 python3 -m venv [your venv name]
@@ -30,7 +30,7 @@ python3 -m venv [your venv name]
 
 ## Development
 
-Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact d.jessop@opgc.fr to discuss adding additional systems or making modifications to existing ones.
+Further development of this code is planned in the near future.  This will include modules for diffusion models in various mineral systems (olivine, opx...)  Please contact the author of the code (d.jessop@opgc.fr) to discuss adding additional systems or making modifications to existing ones.
 
 
 ## Usage
@@ -58,7 +58,7 @@ The module provides the following functions (see the individual function documen
 - calc_fit_plot
 - read_raw_data
 
-For example, to calculate the diffusion coefficient for a given temperature, T, (in K) and O2 partial pressure, fO2, (in Pa) we would use the "diffusion_coeff" function, which itself makes a call to "opx_model":
+For example, to calculate the diffusion coefficient for a given absolute temperature, T, (in K) and O2 partial pressure, fO2, (in Pa) we would use the "diffusion_coeff" function, which itself makes a call to "opx_model":
 ```python
 print(diffusion_model(T, fO2))
 ```
@@ -104,8 +104,7 @@ It might be interesting to batch run the entire database in one go.  Assuming th
 
 ```python
 ## use the glob module to find all the xls file under the archive
-filenames = [f for f in sorted(glob('SEM_traverse_data/**',
-	       recursive=True)) if f.endswith('.xls')] 
+filenames = sorted(glob('SEM_traverse_data/**/*.xls', recursive=True))
 df = run_model_fitting(filenames)
 ## apply the data quality and 'goodness-of-fit' assessments
 sorted_df = sorted_data_to_df(df)
@@ -143,6 +142,7 @@ TO DO!!!
 ├── ml_stats
 |   ├── mle_gamma.py
 |   ├── __init__.py
+├── model_fits   
 ├── mineral_diffusion_timescales.ipynb
 ├── mineral_diffusion_timescales.pdf
 ├── README.md
@@ -151,9 +151,9 @@ TO DO!!!
     │   ├── 0111A_A_02-1.xls
     │   ├── 0111A_A_02-2.xls
     │   ├── 0111A_A_02-3.xls
-    .
-    .
-    .
+    .   .
+    .   .
+    .   .
     │   ├── 0111A_B_34-1.xls
     │   ├── 0111A_B_34-2.xls
     │   └── 0111A_B_34-3.xls
@@ -161,9 +161,9 @@ TO DO!!!
     │   ├── 0913D_A_01-1.xls
     │   ├── 0913D_A_01-2.xls
     │   ├── 0913D_A_01-3.xls
-    .
-    .
-    .
+    .   .
+    .   .
+    .   .
     │   ├── 0913D_C_40-1.xls
     │   ├── 0913D_C_40-2.xls
     │   └── 0913D_C_40-3.xls
@@ -171,9 +171,9 @@ TO DO!!!
     │   ├── 1101via_A_07-1.xls
     │   ├── 1101via_A_07-2.xls
     │   ├── 1101via_A_07-3.xls
-    .
-    .
-    .
+    .   .
+    .   .
+    .   .
     │   ├── 1101via_B_20_1.xls
     │   ├── 1101via_B_20_2.xls
     │   └── 1101via_B_20_3.xls
