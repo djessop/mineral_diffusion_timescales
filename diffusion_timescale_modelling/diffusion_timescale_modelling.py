@@ -249,10 +249,20 @@ def sorted_data_to_df(df, R2thresh=0.85):
                     'timescale', 'n_good', 'ts_std']]
 
 
+def code_eruption_from_filename(filename):
+    import re
+
+    r = re.compile(r'/|\\')     # regex to account for unix ('/') and
+                                # windoze ('\') separators
+    code, eruption, *foo = r.split(filename)[::-1]
+    return code, eruption
+
+
 def run_model_fitting(filenames, do_plot=True, tau=2e6,
                       sheetname = 'Dan, WH37 processing, usabl (2)'):
     from xlrd import XLRDError
     import xlrd
+    import re
 
     # A list for storing dicts.  This will later be converted to a dataframe
     # and used for analysing and averaging the timescales.
@@ -281,7 +291,7 @@ def run_model_fitting(filenames, do_plot=True, tau=2e6,
             p0   = [y.max(), y.min(), x.mean(), tau, D]
 
     
-            code, eruption, *foo = filename.split('/')[::-1]
+            code, eruption = code_eruption_from_filename(filename)
             code = code[:-4]
 
             ##--------------------DATA FITTING--------------------##
@@ -336,7 +346,7 @@ def plot_data_model(filename, popt=None, pcov=None, savefig=True,
     
     '''
 
-    code, eruption, *foo = filename.split('/')[::-1]
+    code, eruption = code_eruption_from_filename(filename)
     code = code[:-4]
 
     data = pd.read_excel(filename, sheet_name='raw')
@@ -573,7 +583,7 @@ if __name__ == '__main__':
 
     filenames = [f for f in sorted(glob('SEM_traverse_data/**',
         recursive=True)) if f.endswith('.xls')]
-    # filenames = [f for f in sorted(glob('SEM_traverse_data/720BCE/**',
-    #     recursive=True)) if f.endswith('.xls')]
+    # filenames = sorted(glob('SEM_traverse_data/**/*.xls',
+    #     recursive=True))
 
     df = run_model_fitting(filenames)
