@@ -572,8 +572,12 @@ def read_raw_data(filename, sheetname='Dan, WH37 processing, usabl (2)',
                   cols=(3,4), start_row=8):
 
     ws = xlrd.open_workbook(filename).sheet_by_name(sheetname)
-    data = np.array([ws.col_values(cols[0])[start_row:],
-                     ws.col_values(cols[1])[start_row:]]).T
+    # data = np.array([ws.col_values(cols[0])[start_row:],
+    #                  ws.col_values(cols[1])[start_row:]]).T
+    data = np.array([[f for f in ws.col_values(cols[0])[start_row:]
+                      if f != ''],
+                     [f for f in ws.col_values(cols[1])[start_row:] 
+                      if f != '']]).T
 
     return data
 
