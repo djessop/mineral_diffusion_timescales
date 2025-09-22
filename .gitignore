@@ -2,7 +2,7 @@
 *.log
 *.npy
 *.png
-*.xlsx
+*.xls*
 *.zip
 AMetcalf_*.ipynb
 MLE_uncert*.ipynb
